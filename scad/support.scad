@@ -3,7 +3,7 @@ $wall = 2;
 $high = 30;
 
 $inset = 30;
-$low = 3;
+$low = 20;
 
 difference(){
     cube([$sq*4,$sq*4,$high]);

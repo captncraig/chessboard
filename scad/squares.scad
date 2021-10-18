@@ -33,8 +33,8 @@ $hole = 10.28;
 
 module standoff(x,y,conn){
     translate([x,y,$top]){
-        $m3 = 2.4;
-        $extra = 2 + $m3;
+        $m3 = 3;
+        $extra = 1.5 + $m3;
         $h = conn - $top;
         difference(){
             cylinder(d=$extra,h=$h,$fn=25);
@@ -56,14 +56,19 @@ module square(x,y,conn){
             translate([$sq-2.1,-.1,.71]){cube([2.2,$sq+.2,.5]);};
             translate([-.1,$sq-2.1,.71]){cube([$sq+.2,2.2,.5]);};
             // center hole
-            translate([$sq/2,$sq/2,-.01])cylinder(d=$hole,h=10);
+            translate([$sq/2,$sq/2,-.01])cylinder(d=$hole,h=10,$fn=25);
         }
         standoff(6.5,6.5,conn);
         standoff(41+2.5,41+2.5,conn);
+        // center hole surround
+        difference(){
+            translate([$sq/2,$sq/2,-.02])cylinder(d=$hole+2,h=5.5,$fn=25);
+            translate([$sq/2,$sq/2,-.03])cylinder(d=$hole,h=10,$fn=25);
+        }
     }
 }
 
 // connectors are slightly different heights. one is 5mm, other is 5.8
-color("gray")square(0,0,5);
-color("white")square(60,0,5.8);
+color("gray")square(0,0,8.8);
+//color("white")square(60,0,5.8);
 
