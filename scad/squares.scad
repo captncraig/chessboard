@@ -50,11 +50,6 @@ module square(x,y,conn){
             cube([$sq,$sq,$top]);
             // hex inlay
             translate([-1,-3,-1])hexgrid([60, 60, 1.4], 11.5470053838, 0.5);
-            // 4 insets for frame
-            translate([-.1,-.1,.71]){cube([$sq+.2,2.2,.5]);};
-            translate([-.1,-.1,.71]){cube([2.2,$sq+.2,.5]);};
-            translate([$sq-2.1,-.1,.71]){cube([2.2,$sq+.2,.5]);};
-            translate([-.1,$sq-2.1,.71]){cube([$sq+.2,2.2,.5]);};
             // center hole
             translate([$sq/2,$sq/2,-.01])cylinder(d=$hole,h=10,$fn=25);
         }
@@ -62,13 +57,18 @@ module square(x,y,conn){
         standoff(41+2.5,41+2.5,conn);
         // center hole surround
         difference(){
-            translate([$sq/2,$sq/2,-.02])cylinder(d=$hole+2,h=5.5,$fn=25);
+            translate([$sq/2,$sq/2,-.02])cylinder(d=$hole+2,h=3,$fn=25);
             translate([$sq/2,$sq/2,-.03])cylinder(d=$hole,h=10,$fn=25);
         }
     }
 }
 
 // connectors are slightly different heights. one is 5mm, other is 5.8
-color("gray")square(0,0,8.8);
+$trimmed = 49.9;
+$off = ($sq-$trimmed)/2;
+intersection(){
+color("gray")square(0,0,8.3);
+translate([$off,$off,-1])cube([$trimmed,$trimmed,1000]);
+}
 //color("white")square(60,0,5.8);
 
